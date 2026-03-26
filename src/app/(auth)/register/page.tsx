@@ -39,7 +39,9 @@ export default function RegisterPage() {
     setError(null);
     try {
       await register(form);
-      router.push('/workspaces');
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect') ?? '/workspaces';
+      router.push(redirect);
     } catch (err: unknown) {
       const message =
         (err as { response?: { data?: { message?: string } } })?.response?.data
